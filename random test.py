@@ -33,7 +33,7 @@ while True:
 
 
 
-import threading
+'''import threading
 import time
 from msvcrt import getch
 
@@ -106,29 +106,21 @@ while True:
     elif key == 'q' or key == 'Q':
         print("Quitting the captures")
         a.stop()
-        break
+        break'''
 
 
-from pyhooked import Hook, KeyboardEvent, MouseEvent
-
+from hook import Hook
 
 def handle_events(args):
-    if isinstance(args, KeyboardEvent):
-        print(args.key_code)
-        if args.current_key == 'A' and args.event_type == 'key down' and 'Lcontrol' in args.pressed_key:
-            print("Ctrl + A was pressed")
-        elif args.current_key == 'Q' and args.event_type == 'key down' and 'Lcontrol' in args.pressed_key:
-            hk.stop()
-            print('Quitting.')
-
-    if isinstance(args, MouseEvent):
-        if args.mouse_x == 300 and args.mouse_y == 400:
-            print("Mouse is at (300,400") 
-
-hk = Hook()  # make a new instance of PyHooked
-hk.handler = handle_events  # add a new shortcut ctrl+a, or triggered on mouseover of (300,400)
-hk.hook()  # hook into the events, and listen to the presses
+    
+    if chr(args.key_code) == "W" or chr(args.key_code) == "w":
+        print("accelerate")
+    elif chr(args.key_code) == "s" or chr(args.key_code) == "S":
+        print("front break")
+    elif args.key_code == 32:
+        print("rear break")
 
 
-
-# ddddddddddddddddddd
+hk = Hook()
+hk.handler = handle_events
+hk.hook()
