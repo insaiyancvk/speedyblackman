@@ -62,14 +62,6 @@ def capture_set1():
             print("space directory not found, creating one")
         except:
             pass
-    
-    # elif not os.path.isdir("./set1/s"):
-    #     print("s directory not found, creating one")
-    #     os.mkdir("./set1/s")
-
-    # elif not os.path.isdir("./set1/space"):
-    #     print("space directory not found, creating one")
-    #     os.mkdir("./set1/space")
 
     def w():
         capture_screen(f"./set1/w/{uuid.uuid1().hex}.png", cord=(0, 155, 1920, 1080))
@@ -90,12 +82,6 @@ def capture_set1():
 # Function that takes care of capturing the frames for left or right turns
 def capture_set2():
 
-    # try:
-    #     os.chdir("./set2")
-    # except:
-    #     os.mkdir("./set2")
-    #     os.chdir("./set2")
-
     if not (os.path.isdir("./set2") and os.path.isdir("./set1/a") and os.path.isdir("./set1/d")):
         
         try:
@@ -115,13 +101,6 @@ def capture_set2():
             print("d directory not found, creating one")
         except:
             pass
-        
-    # if not os.path.isdir("set2"):
-    #     os.mkdir("./set2")
-    # elif not os.path.isdir("./set2/a"):
-    #     os.mkdir("./set2/a")
-    # elif not os.path.isdir("./d"):
-    #     os.mkdir("./set2/d")
     
     def a():
         capture_screen(f"./set2/a/{uuid.uuid1().hex}.png", cord=(0, 155, 1920, 1080))
@@ -132,7 +111,7 @@ def capture_set2():
     keyboard.add_hotkey('a', lambda: a())
     keyboard.add_hotkey('d', lambda: d())
     keyboard.wait()
-capture_set2()
+# capture_set2()
 
 # Function that takes care of capturing the frames for nitro
 def capture_set3():
@@ -151,9 +130,11 @@ def capture_set3():
     def No20():
         capture_screen(f"./set3/No20/{uuid.uuid1().hex}.png", cord=(1434, 662, 1920, 1080))
     
-    # keyboard.add_hotkey('f', lambda: N20())
-    # keyboard.wait()
-    # No20()
+    '''
+    keyboard.add_hotkey('f', lambda: N20())
+    keyboard.wait()
+    No20()
+    '''
 
 
 
