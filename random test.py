@@ -113,11 +113,13 @@ from hook import Hook
 
 def handle_events(args):
     
-    if chr(args.key_code) == "W" or chr(args.key_code) == "w":
+    if 'W' in args.pressed_key:
         print("accelerate")
-    elif chr(args.key_code) == "s" or chr(args.key_code) == "S":
+    
+    elif 'S' in args.pressed_key:
         print("front break")
-    elif args.key_code == 32:
+
+    elif 'Space' in args.pressed_key:
         print("rear break")
 
 
