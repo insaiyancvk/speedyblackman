@@ -92,7 +92,7 @@ class capture_all():
         
         if isinstance(args, KeyboardEvent):
             
-            if 'W' in args.pressed_key:
+            if 'Up' in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set1/w/{uuid.uuid1().hex}.png")
                 ms = mss()
                 ms.compression_level = 9
@@ -101,7 +101,7 @@ class capture_all():
 
                 print(f"Saved to set1/w/")
             
-            elif 'S' in args.pressed_key:
+            elif 'Down' in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set1/s/{uuid.uuid1().hex}.png")
                 ms = mss()
                 ms.compression_level = 9
@@ -124,7 +124,7 @@ class capture_all():
         
         if isinstance(args, KeyboardEvent):
             
-            if 'A' in args.pressed_key:
+            if 'Left' in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set2/a/{uuid.uuid1().hex}.png")
                 ms = mss()
                 ms.compression_level = 9
@@ -132,7 +132,7 @@ class capture_all():
                 Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX').save(f"./set2/a/{uuid.uuid1().hex}.jpg","JPEG")
                 print(f"Saved to set2/a/")
             
-            elif 'D' in args.pressed_key:
+            elif 'Right' in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set2/d/{uuid.uuid1().hex}.png")
                 ms = mss()
                 ms.compression_level = 9
