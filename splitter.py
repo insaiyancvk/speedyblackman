@@ -1,4 +1,5 @@
 # TODO: Cut down train test split to 50:50
+# Process: move 37.5% of train data from both classes to test data
 import json, shutil, os
 
 SPLIT_FOLDERS = {
