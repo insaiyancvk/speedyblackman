@@ -1,3 +1,4 @@
+# TODO: Cut down train test split to 50:50
 import json, shutil, os
 
 SPLIT_FOLDERS = {
