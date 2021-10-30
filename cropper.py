@@ -12,11 +12,11 @@ paths = {
     'd':[]
     }
 
-paths['a'] += os.listdir('./data/set2/a')
-paths['d'] += os.listdir('./data/set2/d/')
+paths['a'] += os.listdir('./data/set1/s')
+paths['d'] += os.listdir('./data/set1/w')
 
-base_path_a = './data/set2/a/'
-base_path_d = './data/set2/d/'
+base_path_a = './data/set1/s/'
+base_path_d = './data/set1/w/'
 
 class send(): 
 

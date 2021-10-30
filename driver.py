@@ -43,29 +43,31 @@ def turn():
 
 def acc():
     keyboard.press("w")
+    time.sleep(5)
+    keyboard.release("w")
+    keyboard.press("s")
+    time.sleep(2)
+    keyboard.release("s")
 
 
 if __name__ == "__main__":
     t = True
     
-    t = time.time()
-    flag = False
-
+    # t = time.time()
+    # flag = False
+    # keyboard.press("w")
     while t:
-        
+        keyboard.press("w")
         try:
-            t1 = threading.Thread(target=turn)
-            t2 = threading.Thread(target=acc)
-            t1.start()
-            t2.start()
-            if time.time()-t == 5:
-                # flag = True
-                # t2.pause()
-                time.sleep(2)
-                t = time.time()
-            # keyboard.press("w")
-            # turn()
+            # t1 = threading.Thread(target=turn)
+            # t2 = threading.Thread(target=acc)
+            # t1.start()
+            # t2.start()
+            turn()
             # keyboard.release("w")
+            # keyboard.press("s")
+            # time.sleep(.01)
+            # keyboard.release("s")
         except KeyboardInterrupt:
             print("Pausing the code")
             t = input("Paused")
