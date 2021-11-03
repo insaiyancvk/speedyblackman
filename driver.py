@@ -5,70 +5,111 @@ Steps:
     2. Take a screenshot for 'left': 0, 'top': 155, 'width': 1920, 'height': 1080
     3. Pass the screenshot to the model
     4. Hold down acceleration and release for 2 secs after every 5 secs
-    5. Left/Right turn only if the value is >0.65
+    5. Left/Right drive only if the value is >0.65
 '''
-
+# Try mobilenet inceptionv2 SSD300 fasterYOLO SSD mobile netv2, v1  tiny yolo 416
 from torchvision import transforms
 from torchvision.models.resnet import resnet18
 import torch.nn as nn
-import torch, time, warnings, keyboard, threading, time
+import torch, time, warnings, keyboard, time
 warnings.filterwarnings("ignore")
 from PIL import Image
 from mss import mss
 
-def turn():
-    ms = mss()
-    sc = ms.grab({'left': 0, 'top': 155, 'width': 1920, 'height': 1080})
-    labels = ['a','d']
-    resnet = resnet18(pretrained=False)
-    resnet.fc = nn.Linear(resnet.fc.in_features, len(labels))
-    resnet.load_state_dict(torch.load('data\set2\SpeedyNet18.pth', map_location=torch.device('cpu')))
-    transform = transforms.Compose([
-                        transforms.Resize([256,256]),
+w = False
+s = False
+a = False
+d = False
+
+turns = ['a','d']
+acc = ['w','s']
+
+resnetTurn = resnet18(pretrained=False)
+resnetTurn.fc = nn.Linear(resnetTurn.fc.in_features, len(turns))
+resnetTurn.load_state_dict(torch.load('data\set2\SpeedyNet18.pth', map_location=torch.device('cpu')))
+
+resnetAcc = resnet18(pretrained=False)
+resnetAcc.fc = nn.Linear(resnetAcc.fc.in_features, len(acc))
+resnetAcc.load_state_dict(torch.load('data\set1\SpeedyNet18acc.pth', map_location=torch.device('cpu')))
+
+transform = transforms.Compose([
+                        transforms.Resize([128,128]),
                         transforms.ToTensor(),
                         transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))
                         ])
+
+def drive():
+    global w,a,s,d
+    start = time.time()
+    ms = mss()
+    sc = ms.grab({'left': 0, 'top': 155, 'width': 1920, 'height': 1080})
+    
     img = transform(Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX'))
     img = img.unsqueeze(0)
-    preds = nn.functional.softmax(resnet(img)[0], dim=0)
-    print(preds.detach().numpy()[0],"\t",preds.detach().numpy()[1])
-    if preds.detach().numpy()[0]>0.5:
+    
+    turnPreds = nn.functional.softmax(resnetTurn(img)[0], dim=0)
+    turnPreds = turnPreds.detach().numpy()
+    
+    accPreds = nn.functional.softmax(resnetAcc(img)[0], dim=0)
+    accPreds = accPreds.detach().numpy()
+    print(f"{time.time()-start}")
+    # exit()
+    print(f"Left:{turnPreds[0]:.2f}\tRight:{turnPreds[1]:.2f}\tAcceleration:{accPreds[0]:.2f}\tBrake{accPreds[1]:.2f}")
+
+    if turnPreds[0]>0.5 and accPreds[0]>0.5:
+        if s:
+            keyboard.release("s")
+            s = False
+        elif d:
+            keyboard.release("d")
+            d = False
         keyboard.press("a")
-        time.sleep(.2)
-        keyboard.release("a")
-    elif preds.detach().numpy()[1]>0.5:
+        keyboard.press("w")
+        a, w = True, True
+
+    elif turnPreds[0]>0.5 and accPreds[1]>0.5:
+        if w:
+            keyboard.release("w")
+            w = False
+        elif d:
+            keyboard.release("d")
+            d = False
+        keyboard.press("a")
+        keyboard.press("s")
+        a, s = True, True
+
+    elif turnPreds[1]>0.5 and accPreds[0]>0.5:
+        if a:
+            keyboard.release("a")
+            a = False
+        elif s:
+            keyboard.release("s")
+            s = False
         keyboard.press("d")
-        time.sleep(.2)
-        keyboard.release("d")
+        keyboard.press("w")
+        w, d = True, True
 
-def acc():
-    keyboard.press("w")
-    time.sleep(5)
-    keyboard.release("w")
-    keyboard.press("s")
-    time.sleep(2)
-    keyboard.release("s")
-
+    elif turnPreds[1]>0.5 and accPreds[1]>0.5:
+        if w:
+            keyboard.release("w")
+            w = False
+        elif a:
+            keyboard.release("a")
+            a = False
+        keyboard.press("d")
+        keyboard.press("s")
+        s, d = True, True
 
 if __name__ == "__main__":
     t = True
     
-    # t = time.time()
-    # flag = False
-    # keyboard.press("w")
     while t:
-        keyboard.press("w")
+
         try:
-            # t1 = threading.Thread(target=turn)
-            # t2 = threading.Thread(target=acc)
-            # t1.start()
-            # t2.start()
-            turn()
-            # keyboard.release("w")
-            # keyboard.press("s")
-            # time.sleep(.01)
-            # keyboard.release("s")
+
+            drive()            
         except KeyboardInterrupt:
+
             print("Pausing the code")
             t = input("Paused")
             if t == "q":
