@@ -7,7 +7,7 @@ Steps:
     4. Hold down acceleration and release for 2 secs after every 5 secs
     5. Left/Right drive only if the value is >0.65
 '''
-# Try mobilenet inceptionv2 SSD300 fasterYOLO SSD mobile netv2, v1  tiny yolo 416
+# Try mobilenet inceptionv2 SSD300 faster YOLO SSD mobile netv2, v1  tiny yolo 416
 from torchvision import transforms
 from torchvision.models.resnet import resnet18
 import torch.nn as nn
