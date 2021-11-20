@@ -48,7 +48,7 @@ class capture_all():
 
         print("checking for set2, a and d directories")
         
-        if not (os.path.isdir("./set2") and os.path.isdir("./set2/a") and os.path.isdir("./set2/d")):
+        if not (os.path.isdir("./set2") and os.path.isdir("./set2/a") and os.path.isdir("./set2/d") and os.path.isdir("./set2/center")):
             
             try:
                 os.mkdir("./set2")
@@ -63,6 +63,11 @@ class capture_all():
             try:
                 os.mkdir("./set2/d")
                 print("d directory not found, creating one")
+            except: pass
+
+            try:
+                os.mkdir("./set2/center")
+                print("center directory not found, creating one")
             except: pass
 
     def set3_dirs(self):
@@ -126,19 +131,29 @@ class capture_all():
             
             if 'Left' in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set2/a/{uuid.uuid1().hex}.png")
-                ms = mss()
-                ms.compression_level = 9
-                sc = ms.grab({'left': 0, 'top': 155, 'width': 1920, 'height': 1080})
-                Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX').save(f"./set2/a/{uuid.uuid1().hex}.jpg","JPEG")
-                print(f"Saved to set2/a/")
+                # ms = mss()
+                # ms.compression_level = 9
+                # sc = ms.grab({'left': 0, 'top': 155, 'width': 1920, 'height': 1080})
+                # Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX').save(f"./set2/a/{uuid.uuid1().hex}.jpg","JPEG")
+                # print(f"Saved to set2/a/")
+                pass
             
             elif 'Right' in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set2/d/{uuid.uuid1().hex}.png")
+                # ms = mss()
+                # ms.compression_level = 9
+                # sc = ms.grab({'left': 0, 'top': 155, 'width': 1920, 'height': 1080})
+                # Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX').save(f"./set2/d/{uuid.uuid1().hex}.jpg","JPEG")
+                # print(f"Saved to set2/d/")
+                pass
+
+            else:
+                # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set2/center/{uuid.uuid1().hex}.png")
                 ms = mss()
                 ms.compression_level = 9
                 sc = ms.grab({'left': 0, 'top': 155, 'width': 1920, 'height': 1080})
-                Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX').save(f"./set2/d/{uuid.uuid1().hex}.jpg","JPEG")
-                print(f"Saved to set2/d/")
+                Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX').save(f"./set2/center/{uuid.uuid1().hex}.jpg","JPEG")
+                print(f"Saved to set2/center/")
 
     def set3_events(self, args):
         ''' Function that takes care of capturing the frames when nitro is used '''
@@ -156,7 +171,7 @@ class capture_all():
     def start_threads(self):
 
         hk1 = Hook()
-        hk1.handler = self.set1_events
+        hk1.handler = self.set2_events
         thread1 = threading.Thread(target=hk1.hook)
         thread1.start()
 
