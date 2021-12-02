@@ -12,8 +12,8 @@ class capture_all():
 
     def __init__(self):
 
-        self.set1_dirs()
-        # self.set2_dirs()
+        # self.set1_dirs()
+        self.set2_dirs()
         # self.set3_dirs()
 
     def set1_dirs(self):
@@ -128,26 +128,26 @@ class capture_all():
         ''' Function that takes care of capturing the frames for left or right turns '''
         
         if isinstance(args, KeyboardEvent):
-            
-            if 'Left' in args.pressed_key:
+            print(args.pressed_key)
+            if 'A' in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set2/a/{uuid.uuid1().hex}.png")
                 # ms = mss()
                 # ms.compression_level = 9
                 # sc = ms.grab({'left': 0, 'top': 155, 'width': 1920, 'height': 1080})
                 # Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX').save(f"./set2/a/{uuid.uuid1().hex}.jpg","JPEG")
-                # print(f"Saved to set2/a/")
+                print(f"Skipped for left turn")
                 pass
             
-            elif 'Right' in args.pressed_key:
+            elif 'D' in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set2/d/{uuid.uuid1().hex}.png")
                 # ms = mss()
                 # ms.compression_level = 9
                 # sc = ms.grab({'left': 0, 'top': 155, 'width': 1920, 'height': 1080})
                 # Image.frombytes("RGB", sc.size, sc.bgra, 'raw', 'BGRX').save(f"./set2/d/{uuid.uuid1().hex}.jpg","JPEG")
-                # print(f"Saved to set2/d/")
+                print(f"Skipped for right turn")
                 pass
 
-            else:
+            elif 'W' in args.pressed_key and 'A' not in args.pressed_key and 'D' not in args.pressed_key:
                 # pyscreenshot.grab(bbox=(0, 155, 1920, 1080)).save(f"./set2/center/{uuid.uuid1().hex}.png")
                 ms = mss()
                 ms.compression_level = 9
@@ -175,7 +175,7 @@ class capture_all():
         thread1 = threading.Thread(target=hk1.hook)
         thread1.start()
 
-
+# y -> 200-500
 if __name__ == '__main__':
 
     print("Checking for \"data\" directory")
