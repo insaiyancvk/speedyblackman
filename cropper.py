@@ -8,15 +8,14 @@ def cropper(path):
   del im
 
 paths = {
-    'a':[],
-    'd':[]
+    'center':[]
     }
 
-paths['a'] += os.listdir('./data/set1/s')
-paths['d'] += os.listdir('./data/set1/w')
+paths['center'] += os.listdir('./data/set2/center')
+# paths['d'] += os.listdir('./data/set1/w')
 
-base_path_a = './data/set1/s/'
-base_path_d = './data/set1/w/'
+base_path_center = './data/set2/center/'
+# base_path_d = './data/set1/w/'
 
 class send(): 
 
@@ -34,11 +33,11 @@ class send():
 
 bot = send()
 
-for value in paths['a']:
+for value in paths['center']:
   print(f'cropping {value}')
-  cropper(base_path_a+value)
+  cropper(base_path_center+value)
 bot.msg('Completed cropping in a')
-for value in paths['d']:
-  print(f'cropping {value}')
-  cropper(base_path_d+value)
+# for value in paths['d']:
+#   print(f'cropping {value}')
+#   cropper(base_path_d+value)
 bot.msg('Completed cropping in d')
