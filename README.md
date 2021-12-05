@@ -2,7 +2,7 @@
 
 > Note: "speedyblackman" is [YT/Blackpanthaa](https://www.youtube.com/c/Blackpanthaa)'s IGN. _Nothing racist._
 
-Here's the plan (Oct 13):
+Here's the plan (Oct 13 2021):
 
 - Three different models on three different datasets. 
     1. Acceleration, break, reverse frames
@@ -15,7 +15,7 @@ Vague TODO:
 - Create dataloader for the dataset working with and save the copy to drive.
 - Test the dataset on different models.
 
-## Training completed (Nov 30).
+## Training completed (Nov 30 2021).
 - Trained the turns data on ResNet18, VGG-19_bn, InceptionV3, MobileNetV2 and AlexNet.
     - AlexNet gave the best results when implemented.
     - Although the train, test accuracies were high, all the models seemed to overfit over a few epochs except AlexNet.
