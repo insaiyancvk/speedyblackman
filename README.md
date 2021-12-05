@@ -2,21 +2,20 @@
 
 > Note: "speedyblackman" is [YT/Blackpanthaa](https://www.youtube.com/c/Blackpanthaa)'s IGN. _Nothing racist._
 
-Here's the plan:
+Here's the plan (Oct 13):
 
 - Three different models on three different datasets. 
     1. Acceleration, break, reverse frames
     2. Left, right turn frames
-    3. Nitro frames
 
-- Work on left/right dataset first, then acceleration/break dataset then nitro dataset.
+- Work on left/right dataset first, then acceleration/break dataset.
 - Implement _speedyblackman_.
 
 Vague TODO:
 - Create dataloader for the dataset working with and save the copy to drive.
 - Test the dataset on different models.
 
-## Training completed.
+## Training completed (Nov 30).
 - Trained the turns data on ResNet18, VGG-19_bn, InceptionV3, MobileNetV2 and AlexNet.
     - AlexNet gave the best results when implemented.
     - Although the train, test accuracies were high, all the models seemed to overfit over a few epochs except AlexNet.
@@ -51,3 +50,4 @@ Vague TODO:
 ## Enough of my rant, look the result for yourself
 
 Check it on [youtube](https://www.youtube.com/watch?v=9AfSzsOr-H8)
+and few other clips in [drive](https://drive.google.com/drive/folders/1LGExSxldYSsDBhlyzmlp0RxWw7yP5g11?usp=sharing)
